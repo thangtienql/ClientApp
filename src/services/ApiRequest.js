@@ -39,12 +39,15 @@ const RequestPostBaseApi = async (url, body, header = null) => {
             },
             body: JSON.stringify(body),
         });
+        if(res.status!==200||res.status!==201)
+            throw 'Error '
         const data = await res.json();
+        console.log('status:',res.status)
         return data;
         // result = {...result, ...{status: res.status, ...data}};
     } catch (error) {
         // result = {...result, ...{status: 501, err: error.toString()}};
-        throw error;
+        throw error.toString();
     }
 };
 
