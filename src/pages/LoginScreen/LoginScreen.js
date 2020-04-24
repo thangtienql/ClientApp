@@ -129,7 +129,7 @@ export default class LoginScreen extends Component {
   async login() {
     try {
 
-      const data = await RequestPostBaseApi('/api/login', { ...this.state }, {});
+      const data = await RequestPostBaseApi('/api/login/client', { ...this.state }, {});
       console.log("login:", data);
       this.props.navigation.navigate('Home');
 
