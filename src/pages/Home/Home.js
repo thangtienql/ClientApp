@@ -30,7 +30,27 @@ export default class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            listProducts: []
+            listProducts: [],
+            listTemps: [],
+            key: ''
+        }
+    }
+    search(st) {
+        this.setState({
+            key: st
+        })
+        const arrSearch = this.state.listTemps.filter((e) => {
+            return e.name.includes(st)
+        })
+        console.log('search:', arrSearch)
+        if (st == '') {
+            this.setState({
+                listProducts: this.state.listTempsa
+            })
+        } else {
+            this.setState({
+                listProducts: arrSearch
+            })
         }
     }
     render() {
@@ -38,7 +58,11 @@ export default class Home extends Component {
             <Container>
                 <Header searchBar rounded>
                     <Item>
-                        <Input placeholder="Search" />
+                        <Input onChangeText={(st) => {
+
+                            this.search(st);
+
+                        }} value={this.state.key} placeholder="Search" />
                     </Item>
                 </Header>
                 <Content>
@@ -62,7 +86,8 @@ export default class Home extends Component {
         const res = await RequestGetBaseApi('/api/products', {}, {});
         console.log(res);
         this.setState({
-            listProducts: res.data
+            listProducts: res.data,
+            listTemps: res.data
         })
     }
 
