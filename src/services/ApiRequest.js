@@ -1,6 +1,6 @@
 
 
-const URL_API = 'http://192.168.1.4:3000';
+const URL_API = 'http://192.168.1.8:3000';
 
 const ObjToQueryStringGet = obj => {
     const keyValuePairs = [];
@@ -39,8 +39,12 @@ const RequestPostBaseApi = async (url, body, header = null) => {
             },
             body: JSON.stringify(body),
         });
-        if(res.status!==200||res.status!==201)
-            throw 'Error '
+        console.log('status:',res.status!=200)
+        if((res.status!=200)){
+            console.log('error log')
+            throw new Error('err post');
+        }
+           
         const data = await res.json();
         console.log('status:',res.status)
         return data;
